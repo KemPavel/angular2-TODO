@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-
-export class Course {
+export class ICourse {
   id: number;
   title: string;
   date: string;
