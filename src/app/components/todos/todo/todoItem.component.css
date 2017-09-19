@@ -1,0 +1,29 @@
+.item {
+  display: flex;
+  align-items: baseline;
+}
+
+.item__main-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 15px;
+  font-size: 120%;
+  font-weight: 600;
+}
+
+.item__info {
+  flex: 1 0 70%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 15px;
+}
+
+.item__description {
+  text-indent: 15px;
+  line-height: 18px;
+}
+
+.item__buttons {
+  flex: 1 0 15%;
+}

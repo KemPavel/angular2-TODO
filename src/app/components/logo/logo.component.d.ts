@@ -1,3 +1,3 @@
 export class ILogo {
-  name: string;
+  title: string;
 }

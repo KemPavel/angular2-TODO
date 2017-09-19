@@ -1,0 +1,26 @@
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 20px 15px;
+}
+
+.logo__image {
+  width: 80px;
+}
+
+.logo__title {
+  font-size: 300%;
+  font-weight: bold;
+  padding-left: 15px;
+  width: 150px;
+}
+
+.logo__button {
+  font-size: 130%;
+  margin-right: auto;
+  margin-top: 24px;
+}
+
+.logo__button:hover {
+  cursor: pointer;
+}

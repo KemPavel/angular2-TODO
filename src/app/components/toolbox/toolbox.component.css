@@ -1,0 +1,21 @@
+.toolbox {
+  display: flex;
+  align-items: center;
+}
+
+.toolbox__find-button {
+  margin: 0 auto 0 20px;
+}
+
+.toolbox__add-button {
+}
+
+.toolbox__input {
+  background: #e8e8e8;
+  border: 2px solid #999;
+  font-size: 140%;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 15px;
+  width: 280px;
+}
