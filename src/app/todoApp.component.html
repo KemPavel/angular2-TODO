@@ -1,7 +1,10 @@
 <main class="container border-gray-container">
   <todo-header></todo-header>
   <todo-logo></todo-logo>
-  <todo-toolbox></todo-toolbox>
-  <todo-list></todo-list>
-  <todo-footer></todo-footer>
+  <todo-login *ngIf="isLoginFormVisible()"></todo-login>
+  <div *ngIf="!isLoginFormVisible()">
+    <todo-toolbox></todo-toolbox>
+    <todo-list></todo-list>
+    <todo-footer></todo-footer>
+  </div>
 </main>

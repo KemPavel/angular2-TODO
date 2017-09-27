@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { ITodoItem } from './todo/todoItem.component.d';
-let TODOS: ITodoItem[] = [
+import { ITodoItem } from '../components/todos/todo/todoItem.component.d';
+
+const todos: ITodoItem[] = [
   {
     id: 0,
     title: 'TODO_1',
@@ -29,11 +30,11 @@ let TODOS: ITodoItem[] = [
 
 export class TodoListService {
   getTodos(): ITodoItem[] {
-    return TODOS;
+    return todos;
   };
 
   getTodoById(id: number): ITodoItem {
-    return TODOS.find(todo => todo.id === id);
+    return todos.find(todo => todo.id === id);
   };
 
   createTodo(): void {
@@ -44,9 +45,7 @@ export class TodoListService {
   };
 
   deleteTodo(id: number): void {
-    console.log(345);
-    TODOS = TODOS.filter(todo => todo.id !== id);
-    console.log(TODOS);
+    todos.splice(todos.findIndex(todo => todo.id === id), 1);
   };
 
 }

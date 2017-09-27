@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { TodoListService } from '../todoList.service';
 
 import { ITodoItem } from './todoItem.component.d';
 
@@ -8,15 +7,15 @@ import { ITodoItem } from './todoItem.component.d';
   selector: 'todo-item',
   templateUrl: './todoItem.component.html',
   styleUrls: ['./todoItem.component.css'],
-  providers: [TodoListService]
 })
 export class TodoItemComponent {
-  constructor(private todoListService: TodoListService) {
+  constructor() {
 
   }
     @Input() todo: ITodoItem;
+    @Output() deleteTodo: EventEmitter<any> = new EventEmitter();
 
-    deleteTodo(todo: ITodoItem): void {
-      this.todoListService.deleteTodo(todo.id);
+    onDeleteTodo(todo: ITodoItem): void {
+      this.deleteTodo.emit(this.todo.id);
     }
 }

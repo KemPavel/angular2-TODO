@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 
-import { TodoListService } from './todoList.service';
+import { TodoListService } from '../../services/todoList.service';
 import { ITodoItem } from './todo/todoItem.component.d';
 
 @Component({
@@ -22,11 +22,16 @@ export class TodoListComponent {
   }
 
   getTodos(): void {
-    console.log('initialize todo items ARRAY by Angular onInit lifecycle-hook');
     this.todos = this.todoListService.getTodos();
   }
 
   getTodoById(id: number): void {
     this.todoListService.getTodoById(id);
+  }
+
+  handleDeleteTodo(id: number): void {
+    console.log(id);
+    const isDeleteConfirmed: boolean = confirm('Do you really want to delete this course?');
+    isDeleteConfirmed && this.todoListService.deleteTodo(id);
   }
 }

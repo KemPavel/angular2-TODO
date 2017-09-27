@@ -1,0 +1,10 @@
+<main>
+  <input type="text" required placeholder="login" [(ngModel)]="userName">
+  <input type="password" required placeholder="password" [(ngModel)]="password">
+  <div (click)="login()">
+    <p>Login</p>
+  </div>
+  <div (click)="closeLoginForm()">
+    <p>Back</p>
+  </div>
+</main>

@@ -1,5 +1,5 @@
 <ul>
-  <li class="border-gray-container" *ngFor="let todo of todos">
-    <todo-item [todo]="todo"></todo-item>
+  <li class="border-gray-container" *ngFor="let todo of todos" >
+    <todo-item [todo]="todo" (deleteTodo)="handleDeleteTodo($event)"></todo-item>
   </li>
 </ul>

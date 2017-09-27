@@ -5,7 +5,7 @@
     <span>Todos</span>
   </div>
   <div>
-    <p>user login</p>
-    <p>logoff</p>
+    <p class="main-button border-gray-container" (click)="onLoginButtonClick()" *ngIf="!isAuthenticated()">login</p>
+    <p class="main-button border-gray-container" (click)="onLogoutButtonClick()" *ngIf="isAuthenticated()">logout</p>
   </div>
 </main>
