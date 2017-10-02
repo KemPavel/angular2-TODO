@@ -12,16 +12,13 @@ export class AuthorizationService {
 
   showLoginForm(): void {
     this.isLoginFormVisible = true;
-    console.log('login', this.isLoginFormVisible);
   };
 
   hideLoginForm(): void {
     this.isLoginFormVisible = false;
-    console.log('logout', this.isLoginFormVisible);
   };
 
   login(userName: string, password: string): void {
-    console.log('login');
     localStorage.setItem('userInfo', JSON.stringify({userName, password}));
     this.hideLoginForm();
   };

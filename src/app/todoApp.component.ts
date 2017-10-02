@@ -5,15 +5,13 @@ import { AuthorizationService } from './services/authorization.service';
 @Component({
   selector: 'todo-app',
   templateUrl: './todoApp.component.html',
-  styleUrls: ['./todoApp.component.css'],
-  providers: [AuthorizationService]
+  styleUrls: ['./todoApp.component.css']
 })
 
 export class TodoAppComponent {
   constructor(private authorizationService: AuthorizationService) {}
 
   isLoginFormVisible(): boolean {
-    console.log(this.authorizationService.isLoginFormVisible);
     return this.authorizationService.isLoginFormVisible;
   }
  }

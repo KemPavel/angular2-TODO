@@ -1,10 +1,12 @@
 <main>
-  <input type="text" required placeholder="login" [(ngModel)]="userName">
-  <input type="password" required placeholder="password" [(ngModel)]="password">
-  <div (click)="login()">
+  <div class="login-form">
+    <input class="login-form__input" type="text" required placeholder="login" [(ngModel)]="userName">
+    <input class="login-form__input" type="password" required placeholder="password" [(ngModel)]="password">
+  </div>
+  <div class="main-button border-gray-container" (click)="login()">
     <p>Login</p>
   </div>
-  <div (click)="closeLoginForm()">
+  <div class="main-button border-gray-container" (click)="closeLoginForm()">
     <p>Back</p>
   </div>
 </main>

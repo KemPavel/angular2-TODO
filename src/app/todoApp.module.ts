@@ -11,10 +11,15 @@ import { TodoListComponent } from './components/todos/todoList.component';
 import { TodoItemComponent } from './components/todos/todo/todoItem.component';
 import { FooterComponent } from './components/footer/footer.component';
 
+import { AuthorizationService } from './services/authorization.service';
+
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule
+  ],
+  providers: [
+    AuthorizationService
   ],
   declarations: [
     TodoAppComponent,

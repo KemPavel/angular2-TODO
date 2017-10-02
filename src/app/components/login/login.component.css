@@ -1,0 +1,14 @@
+.login-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-form__input {
+  background: #e8e8e8;
+  border: 2px solid #999;
+  font-size: 140%;
+  flex-basis: 45%;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 15px;
+}

@@ -6,23 +6,25 @@ import { AuthorizationService } from '../../services/authorization.service';
 @Component({
   selector: 'todo-logo',
   templateUrl: './logo.component.html',
-  styleUrls: ['./logo.component.css'],
-  providers: [AuthorizationService]
+  styleUrls: ['./logo.component.css']
 })
 export class LogoComponent {
   constructor(private authorizationService: AuthorizationService) {}
 
+  isLoginButtonVisible = true;
   title = 'Logo';
 
   onLoginButtonClick(): void {
     this.authorizationService.showLoginForm();
+    this.isAuthenticated();
   };
 
   onLogoutButtonClick(): void {
     this.authorizationService.hideLoginForm();
+    this.isAuthenticated();
   };
 
-  isAuthenticated(): boolean {
-    return this.authorizationService.isAuthenticated();
+  isAuthenticated(): void {
+    this.isLoginButtonVisible = this.authorizationService.isAuthenticated();
   };
 }

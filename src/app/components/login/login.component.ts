@@ -5,8 +5,7 @@ import { AuthorizationService } from '../../services/authorization.service';
 @Component({
   selector: 'todo-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers: [AuthorizationService]
+  styleUrls: ['./login.component.css']
 })
 
 export class LoginComponent {
@@ -17,6 +16,7 @@ export class LoginComponent {
 
   login(): void {
     this.authorizationService.login(this.userName, this.password);
+    console.log(`YOU HAVE SUCESSFULLY LOGGED IN WITH NAME: ${this.userName} AND PASSWORD: ${this.password}`);
   }
 
   closeLoginForm(): void {
