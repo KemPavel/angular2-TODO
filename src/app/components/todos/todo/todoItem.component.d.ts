@@ -4,4 +4,5 @@ export class ITodoItem {
   date: string;
   description: string;
   duration: string;
+  topRated?: boolean;
 }

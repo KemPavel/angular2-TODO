@@ -11,20 +11,17 @@ import { AuthorizationService } from '../../services/authorization.service';
 export class LogoComponent {
   constructor(private authorizationService: AuthorizationService) {}
 
-  isLoginButtonVisible = true;
   title = 'Logo';
 
   onLoginButtonClick(): void {
     this.authorizationService.showLoginForm();
-    this.isAuthenticated();
   };
 
   onLogoutButtonClick(): void {
     this.authorizationService.hideLoginForm();
-    this.isAuthenticated();
   };
 
-  isAuthenticated(): void {
-    this.isLoginButtonVisible = this.authorizationService.isAuthenticated();
+  isAuthenticated(): boolean {
+    return this.authorizationService.isAuthenticated();
   };
 }

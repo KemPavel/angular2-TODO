@@ -3,6 +3,7 @@
     <p class="item__main-info">
       <span>{{todo.title}}</span>
       <span>{{todo.duration}}</span>
+      <img *ngIf="todo.topRated" class="item__star-icon" src="../../../../assets/images/star.png" alt="">
       <span>{{todo.date}}</span>
     </p>
     <p class="item__description">{{todo.description}}</p>

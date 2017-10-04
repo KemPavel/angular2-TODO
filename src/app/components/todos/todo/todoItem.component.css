@@ -27,3 +27,8 @@
 .item__buttons {
   flex: 1 0 15%;
 }
+
+.item__star-icon {
+  height: 20px;
+  widows: 20px;
+}

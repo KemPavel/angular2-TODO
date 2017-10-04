@@ -1,5 +1,6 @@
 <ul>
-  <li class="border-gray-container" *ngFor="let todo of todos" >
+  <li [highlight]="todo.date" class="border-gray-container" *ngFor="let todo of todos" >
     <todo-item [todo]="todo" (deleteTodo)="handleDeleteTodo($event)"></todo-item>
   </li>
+  <div *ngIf="!isCoursesShown()">No data. Feel free to add new course.</div>
 </ul>

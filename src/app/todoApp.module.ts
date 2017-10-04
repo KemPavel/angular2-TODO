@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
+import { HighlightBorder } from './directives/highlightBorder.directive';
+
 import { TodoAppComponent } from './todoApp.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LogoComponent } from './components/logo/logo.component';
@@ -22,6 +24,7 @@ import { AuthorizationService } from './services/authorization.service';
     AuthorizationService
   ],
   declarations: [
+    HighlightBorder,
     TodoAppComponent,
     HeaderComponent,
     LogoComponent,

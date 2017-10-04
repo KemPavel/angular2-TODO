@@ -34,4 +34,8 @@ export class TodoListComponent {
     const isDeleteConfirmed: boolean = confirm('Do you really want to delete this course?');
     isDeleteConfirmed && this.todoListService.deleteTodo(id);
   }
+
+  isCoursesShown(): boolean {
+    return !!this.todoListService.getTodos().length;
+  }
 }

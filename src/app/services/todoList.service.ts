@@ -6,21 +6,22 @@ const todos: ITodoItem[] = [
   {
     id: 0,
     title: 'TODO_1',
-    date: '19.09.2017',
+    date: '2017-09-27',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, vitae id nam sit fuga magni. Deserunt sint aspernatur, adipisci totam in quisquam laborum accusantium assumenda repellendus optio! Qui, vitae, nostrum.',
-    duration: '1h 30min'
+    duration: '1h 30min',
+    topRated: true
   },
   {
     id: 1,
     title: 'TODO_2',
-    date: '19.09.2017',
+    date: '2017-11-19',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, vitae id nam sit fuga magni. Deserunt sint aspernatur, adipisci totam in quisquam laborum accusantium assumenda repellendus optio! Qui, vitae, nostrum.',
     duration: '12h 30min'
   },
   {
     id: 2,
     title: 'TODO_3',
-    date: '19.09.2017',
+    date: '2017-10-04',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, vitae id nam sit fuga magni. Deserunt sint aspernatur, adipisci totam in quisquam laborum accusantium assumenda repellendus optio! Qui, vitae, nostrum.',
     duration: '30min'
   },
