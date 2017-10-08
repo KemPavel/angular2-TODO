@@ -3,6 +3,6 @@ export class ITodoItem {
   title: string;
   date: string;
   description: string;
-  duration: string;
+  duration: number;
   topRated?: boolean;
 }

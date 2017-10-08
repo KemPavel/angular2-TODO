@@ -1,10 +1,10 @@
 <div class="item">
   <div class="item__info">
     <p class="item__main-info">
-      <span>{{todo.title}}</span>
-      <span>{{todo.duration}}</span>
+      <span>{{todo.title | uppercase}}</span>
+      <span>{{todo.duration | convertDuration}}</span>
       <img *ngIf="todo.topRated" class="item__star-icon" src="../../../../assets/images/star.png" alt="">
-      <span>{{todo.date}}</span>
+      <span>{{todo.date | date:'dd-MMM-yyyy'}}</span>
     </p>
     <p class="item__description">{{todo.description}}</p>
   </div>

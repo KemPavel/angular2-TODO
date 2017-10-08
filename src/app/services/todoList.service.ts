@@ -5,25 +5,25 @@ import { ITodoItem } from '../components/todos/todo/todoItem.component.d';
 const todos: ITodoItem[] = [
   {
     id: 0,
-    title: 'TODO_1',
+    title: 'Todo_1',
     date: '2017-09-27',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, vitae id nam sit fuga magni. Deserunt sint aspernatur, adipisci totam in quisquam laborum accusantium assumenda repellendus optio! Qui, vitae, nostrum.',
-    duration: '1h 30min',
+    duration: 90,
     topRated: true
   },
   {
     id: 1,
-    title: 'TODO_2',
+    title: 'Todo_2',
     date: '2017-11-19',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, vitae id nam sit fuga magni. Deserunt sint aspernatur, adipisci totam in quisquam laborum accusantium assumenda repellendus optio! Qui, vitae, nostrum.',
-    duration: '12h 30min'
+    duration: 750
   },
   {
     id: 2,
-    title: 'TODO_3',
+    title: 'Todo_3',
     date: '2017-10-04',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, vitae id nam sit fuga magni. Deserunt sint aspernatur, adipisci totam in quisquam laborum accusantium assumenda repellendus optio! Qui, vitae, nostrum.',
-    duration: '30min'
+    duration: 30
   },
 ];
 

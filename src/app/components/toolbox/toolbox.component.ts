@@ -1,5 +1,4 @@
-
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { IToolbox } from './toolbox.component.d';
 
@@ -12,8 +11,9 @@ import { IToolbox } from './toolbox.component.d';
 export class ToolboxComponent {
  query: string;
 
- onFindButtonClick(): void {
-   console.log(this.query);
- }
+@Output() searchForTodos: EventEmitter<any> = new EventEmitter();
 
+ onFindButtonClick(): void {
+   this.searchForTodos.emit(this.query);
+ }
 }

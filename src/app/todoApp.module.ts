@@ -4,6 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { HighlightBorder } from './directives/highlightBorder.directive';
 
+import { ConvertDurationPipe } from './pipes/duration.pipe';
+import { OrderByPipe } from './pipes/orderBy.pipe';
+import { SearchByNamePipe } from './pipes/search.pipe';
+
 import { TodoAppComponent } from './todoApp.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LogoComponent } from './components/logo/logo.component';
@@ -25,6 +29,9 @@ import { AuthorizationService } from './services/authorization.service';
   ],
   declarations: [
     HighlightBorder,
+    ConvertDurationPipe,
+    OrderByPipe,
+    SearchByNamePipe,
     TodoAppComponent,
     HeaderComponent,
     LogoComponent,

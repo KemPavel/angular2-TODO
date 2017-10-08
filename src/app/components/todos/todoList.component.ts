@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { SearchByNamePipe } from '../../pipes/search.pipe';
 
 import { TodoListService } from '../../services/todoList.service';
 import { ITodoItem } from './todo/todoItem.component.d';
@@ -8,21 +8,22 @@ import { ITodoItem } from './todo/todoItem.component.d';
   selector: 'todo-list',
   templateUrl: './todoList.component.html',
   styleUrls: ['./todoList.component.css'],
-  providers: [TodoListService]
+  providers: [TodoListService, SearchByNamePipe]
 })
 
 export class TodoListComponent {
-  constructor(private todoListService: TodoListService) {
-
-  }
+  constructor(private todoListService: TodoListService, private searchPipe: SearchByNamePipe) {}
+  @Input() searchQuery: string;
+  allTodos: ITodoItem[];
   todos: ITodoItem[];
 
   ngOnInit(): void {
-    this.getTodos();
+    this.allTodos = this.todoListService.getTodos();
+    this.todos = this.allTodos;
   }
 
-  getTodos(): void {
-    this.todos = this.todoListService.getTodos();
+  ngOnChanges(): void {
+    this.todos = this.searchPipe.transform(this.allTodos, this.searchQuery);
   }
 
   getTodoById(id: number): void {

@@ -3,8 +3,8 @@
   <todo-logo></todo-logo>
   <todo-login *ngIf="isLoginFormVisible()"></todo-login>
   <div *ngIf="!isLoginFormVisible()">
-    <todo-toolbox></todo-toolbox>
-    <todo-list></todo-list>
+    <todo-toolbox (searchForTodos)="onSearchForTodos($event)"></todo-toolbox>
+    <todo-list [searchQuery]="searchQuery"></todo-list>
   </div>
   <todo-footer></todo-footer>
 </main>
