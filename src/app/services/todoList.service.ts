@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-
+import { Http } from '@angular/http';
+import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 import { ITodoItem } from '../components/todos/todo/todoItem.component.d';
 
 const todos: ITodoItem[] = [
@@ -30,9 +33,18 @@ const todos: ITodoItem[] = [
 @Injectable()
 
 export class TodoListService {
-  getTodos(): ITodoItem[] {
-    return todos;
+
+  constructor(private http: Http) {}
+
+  getTodos(): Observable<ITodoItem[]> {
+    return Observable.create((observer: any) => {
+              observer.next(todos);
+      });
   };
+
+  getNumberOfTodos(): number {
+    return todos.length;
+  }
 
   getTodoById(id: number): ITodoItem {
     return todos.find(todo => todo.id === id);

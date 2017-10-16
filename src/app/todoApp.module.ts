@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { HighlightBorder } from './directives/highlightBorder.directive';
 
@@ -22,7 +23,8 @@ import { AuthorizationService } from './services/authorization.service';
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   providers: [
     AuthorizationService

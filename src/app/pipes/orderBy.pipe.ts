@@ -8,6 +8,8 @@ import { ITodoItem } from '../components/todos/todo/todoItem.component.d';
 
 export class OrderByPipe implements PipeTransform {
   transform(todos: ITodoItem[]): ITodoItem[] {
-    return todos.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+    if (todos && todos.length) {
+      return todos.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+    }
   }
 }
