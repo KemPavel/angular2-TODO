@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { SearchByNamePipe } from '../../pipes/search.pipe';
 
 import { TodoListService } from '../../services/todoList.service';
@@ -8,7 +8,8 @@ import { ITodoItem } from './todo/todoItem.component.d';
   selector: 'todo-list',
   templateUrl: './todoList.component.html',
   styleUrls: ['./todoList.component.css'],
-  providers: [TodoListService, SearchByNamePipe]
+  providers: [TodoListService, SearchByNamePipe],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class TodoListComponent {
@@ -31,9 +32,10 @@ export class TodoListComponent {
   }
 
   handleDeleteTodo(id: number): void {
-    console.log(id);
+    console.log(this.todos);
     const isDeleteConfirmed: boolean = confirm('Do you really want to delete this course?');
     isDeleteConfirmed && this.todoListService.deleteTodo(id);
+    this.todos = this.todoListService.getTodos();
   }
 
   isCoursesShown(): boolean {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { ILogo } from './logo.component.d';
 import { AuthorizationService } from '../../services/authorization.service';
@@ -6,7 +6,8 @@ import { AuthorizationService } from '../../services/authorization.service';
 @Component({
   selector: 'todo-logo',
   templateUrl: './logo.component.html',
-  styleUrls: ['./logo.component.css']
+  styleUrls: ['./logo.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogoComponent {
   constructor(private authorizationService: AuthorizationService) {}

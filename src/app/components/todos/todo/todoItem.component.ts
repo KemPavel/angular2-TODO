@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 
 import { ITodoItem } from './todoItem.component.d';
@@ -7,6 +7,7 @@ import { ITodoItem } from './todoItem.component.d';
   selector: 'todo-item',
   templateUrl: './todoItem.component.html',
   styleUrls: ['./todoItem.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoItemComponent {
   constructor() {
