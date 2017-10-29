@@ -9,5 +9,5 @@ import { IHeader } from './header.component.d';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-  title =  'TODO app';
+  title = 'TODO app';
 }

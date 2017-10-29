@@ -13,6 +13,7 @@ import { AuthorizationService } from './services/authorization.service';
 
 export class TodoAppComponent {
   public searchQuery: string;
+  public isAuth: boolean;
   constructor(private authorizationService: AuthorizationService) {}
 
   isLoginFormVisible(): boolean {
@@ -20,7 +21,10 @@ export class TodoAppComponent {
   }
 
   onSearchForTodos(query: string): void {
-    console.log('appComponent', query);
     this.searchQuery = query;
+  }
+
+  handleAuth(): void {
+    this.isAuth = this.authorizationService.isAuthenticated();
   }
  }

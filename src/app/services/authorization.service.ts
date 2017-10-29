@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 
@@ -32,9 +33,9 @@ export class AuthorizationService {
     return !!localStorage.getItem('userInfo');
   };
 
-  getUserInfo(): string {
+  getUserInfo(): Observable<any> {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    return userInfo.userName;
+    return Observable.of(userInfo);
   };
 
 }

@@ -24,3 +24,7 @@
 .logo__button:hover {
   cursor: pointer;
 }
+
+.user-name {
+  font-weight: bold;
+}

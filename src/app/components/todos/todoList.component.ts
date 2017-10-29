@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { SearchByNamePipe } from '../../pipes/search.pipe';
 import { Observable } from 'rxjs/Observable';
 
@@ -13,7 +13,7 @@ import { ITodoItem } from './todo/todoItem.component.d';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class TodoListComponent {
+export class TodoListComponent implements OnInit {
   constructor(private todoListService: TodoListService, private searchPipe: SearchByNamePipe, private changeDetectorRef: ChangeDetectorRef) {}
   @Input() searchQuery: string;
   observTodos: Observable<ITodoItem[]>;
@@ -24,9 +24,9 @@ export class TodoListComponent {
     this.observTodos = this.todoListService.getTodos();
     this.observTodos.subscribe((data) => {
       this.todos = data;
+      this.allTodos = this.todos;
       this.changeDetectorRef.markForCheck();
     })
-
   }
 
   ngOnChanges(): void {
@@ -41,8 +41,7 @@ export class TodoListComponent {
     console.log(this.todos);
     const isDeleteConfirmed: boolean = confirm('Do you really want to delete this course?');
     isDeleteConfirmed && this.todoListService.deleteTodo(id);
-    this.todoListService.getTodos().subscribe( data => this.allTodos = data);
-    // this.todos = this.todoListService.getTodos();
+    this.todoListService.getTodos().subscribe( data => this.todos = data);
   }
 
   isCoursesShown(): boolean {

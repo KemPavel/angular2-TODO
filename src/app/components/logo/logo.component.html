@@ -6,6 +6,9 @@
   </div>
   <div>
     <p class="main-button border-gray-container" (click)="onLoginButtonClick()" *ngIf="!isAuthenticated()">login</p>
-    <p class="main-button border-gray-container" (click)="onLogoutButtonClick()" *ngIf="isAuthenticated()">logout</p>
+    <p class="main-button border-gray-container" (click)="onLogoutButtonClick()" *ngIf="isAuthenticated()">
+      <span class="user-name">{{userName}}</span>
+      <span>logout</span>
+    </p>
   </div>
 </main>
