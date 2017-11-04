@@ -9,6 +9,7 @@ import { ConvertDurationPipe } from './pipes/duration.pipe';
 import { OrderByPipe } from './pipes/orderBy.pipe';
 import { SearchByNamePipe } from './pipes/search.pipe';
 
+import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TodoAppComponent } from './todoApp.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LogoComponent } from './components/logo/logo.component';
@@ -19,6 +20,8 @@ import { TodoItemComponent } from './components/todos/todo/todoItem.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { AuthorizationService } from './services/authorization.service';
+import { TodoListService } from './services/todoList.service';
+import { SpinnerService } from './services/spinner.service';
 
 @NgModule({
   imports: [
@@ -27,13 +30,16 @@ import { AuthorizationService } from './services/authorization.service';
     HttpModule
   ],
   providers: [
-    AuthorizationService
+    AuthorizationService,
+    TodoListService,
+    SpinnerService
   ],
   declarations: [
     HighlightBorder,
     ConvertDurationPipe,
     OrderByPipe,
     SearchByNamePipe,
+    SpinnerComponent,
     TodoAppComponent,
     HeaderComponent,
     LogoComponent,

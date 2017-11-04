@@ -1,6 +1,6 @@
 <main class="container border-gray-container">
   <todo-header></todo-header>
-  <todo-logo [isAuth]="isAuth"></todo-logo>
+  <todo-logo></todo-logo>
   <todo-login *ngIf="isLoginFormVisible()" (login)="handleAuth()"></todo-login>
   <div *ngIf="!isLoginFormVisible()">
     <todo-toolbox (searchForTodos)="onSearchForTodos($event)"></todo-toolbox>
@@ -8,3 +8,4 @@
   </div>
   <todo-footer></todo-footer>
 </main>
+<todo-spinner></todo-spinner>

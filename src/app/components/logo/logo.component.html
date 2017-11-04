@@ -5,8 +5,8 @@
     <span>Todos</span>
   </div>
   <div>
-    <p class="main-button border-gray-container" (click)="onLoginButtonClick()" *ngIf="!isAuthenticated()">login</p>
-    <p class="main-button border-gray-container" (click)="onLogoutButtonClick()" *ngIf="isAuthenticated()">
+    <p class="main-button border-gray-container" (click)="onLoginButtonClick()" *ngIf="!isAuth">login</p>
+    <p class="main-button border-gray-container" (click)="onLogoutButtonClick()" *ngIf="isAuth">
       <span class="user-name">{{userName}}</span>
       <span>logout</span>
     </p>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 
@@ -10,6 +11,7 @@ class userInfo {
 
 export class AuthorizationService {
   public isLoginFormVisible: boolean = false;
+  public authSubject = new Subject<any>();
 
   showLoginForm(): void {
     this.isLoginFormVisible = true;
@@ -21,21 +23,21 @@ export class AuthorizationService {
 
   login(userName: string, password: string): void {
     localStorage.setItem('userInfo', JSON.stringify({userName, password}));
+    this.getUserInfo(userName);
     this.hideLoginForm();
   };
 
   logout(): void {
     localStorage.removeItem('userInfo');
-    console.log(localStorage);
+    this.getUserInfo('');
   };
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('userInfo');
   };
 
-  getUserInfo(): Observable<any> {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    return Observable.of(userInfo);
+  getUserInfo(name: string) {
+    this.authSubject.next(name);
   };
 
 }

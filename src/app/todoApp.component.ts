@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 
 import { ITodoItem } from './components/todos/todo/todoItem.component.d';
 
@@ -26,5 +26,9 @@ export class TodoAppComponent {
 
   handleAuth(): void {
     this.isAuth = this.authorizationService.isAuthenticated();
+  }
+
+  ngOnDestroy() {
+    this.authorizationService.authSubject.unsubscribe();
   }
  }
