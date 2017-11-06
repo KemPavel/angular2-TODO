@@ -3,3 +3,6 @@ node_modules/**
 dist/**
 **/*.js
 **/*.map
+
+!mock-server/**/*.js
+mock-server/node_modules/**

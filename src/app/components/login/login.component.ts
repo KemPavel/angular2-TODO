@@ -22,7 +22,10 @@ export class LoginComponent {
   ) {}
 
   onLogin(): void {
-    this.authorizationService.login(this.userName, this.password);
+    this.authorizationService.login(this.userName, this.password)
+      .subscribe((data: any) => {
+        console.log(data);
+      });
     this.login.emit();
     this.spinnerService.show();
     this.test();

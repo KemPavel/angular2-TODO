@@ -22,6 +22,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AuthorizationService } from './services/authorization.service';
 import { TodoListService } from './services/todoList.service';
 import { SpinnerService } from './services/spinner.service';
+import { AuthorizedHttp } from './services/http.service';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { SpinnerService } from './services/spinner.service';
   providers: [
     AuthorizationService,
     TodoListService,
-    SpinnerService
+    SpinnerService,
+    AuthorizedHttp
   ],
   declarations: [
     HighlightBorder,

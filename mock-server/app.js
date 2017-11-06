@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser')
+const url = require('url');
 
-import 'rxjs/add/operator/map';
+let user = {
+  userName: null,
+  password: null
+};
 
-import { ITodoItem } from '../components/todos/todo/todoItem.component.d';
-
-const todos: ITodoItem[] = [
+let todos = [
   {
     id: 0,
     title: 'Todo_1',
@@ -54,53 +54,63 @@ const todos: ITodoItem[] = [
   }
 ];
 
-@Injectable()
+app.use(bodyParser.json())
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept, authorization');
+  next();
+})
 
-export class TodoListService {
-  public todosSubject = new Subject<any>();
-
-  constructor(private http: Http) {}
-
-  getTodos(): void {
-    this.http.get('http://localhost:3004/todos')
-      .map((res: any) => res.json())
-      .subscribe((todos) => {
-        this.updateTodos(todos);
-      });
-  };
-
-  getNumberOfTodos(): number {
-    return todos.length;
+app.get('/todos', function(req, res) {
+  let showAll = req.query.all;
+  let searchString = req.query.search;
+  console.log(showAll, 'showAll');
+  if(searchString && searchString.replace(/ +(?= )/g,'').length > 0) {
+    let filteredTodos = todos.filter(todo => {
+      if(todo.title.toLowerCase().indexOf(searchString.toLowerCase()) > -1) {
+        return todo;
+      }
+    });
+    res.send(filteredTodos);
+  } else if(showAll) {
+    res.send(todos);
+  } else {
+    res.send(todos.slice(0, 3));
   }
+});
 
-  getTodoById(id: number): ITodoItem {
-    return todos.find(todo => todo.id === id);
-  };
-
-  searchForTodos(search: string = '', showAll?: string): void {
-    this.http.get('http://localhost:3004/todos?search=' + search + '&all=' + showAll)
-      .map((data: Response) => data.json())
-      .subscribe((todos) => {
-        this.updateTodos(todos);
-      });
+app.delete('/todos/:id', function(req, res) {
+  const id = req.params.id;
+  const index = todos.findIndex(function(todo) {
+    return todo.id == id;
+  });
+  if(index > -1) {
+    todos.splice(index, 1);
   }
+  res.status(204);
+  res.send();
+})
 
-  createTodo(): void {
-  };
+app.post('/login', function(req, res) {
+  user.userName = req.body.userName;
+  user.password = req.body.password;
 
-  updateTodo(): void {
+  res.status(200);
+  res.send({token: '1q2w3e4r5t6y7u8i9o0p'})
+})
 
-  };
+app.post('/logout', function(req, res) {
+  user.userName = null;
+  user.password = null;
 
-  updateTodos(todos: ITodoItem[]): void {
-    this.todosSubject.next(todos);
-  }
+  res.send({token: null});
+})
 
-  deleteTodo(id: number): void {
-    this.http.delete('http://localhost:3004/todos/' + id)
-      .subscribe(() => {
-        this.getTodos();
-      });
-  };
+app.get('/userinfo', function(req, res) {
+  res.send(user);
+})
 
-}
+app.listen(3004, function () {
+  console.log('Example app listening on port 3004!');
+});

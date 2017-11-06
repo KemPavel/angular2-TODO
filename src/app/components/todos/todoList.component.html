@@ -2,5 +2,6 @@
   <li [highlight]="todo.date" class="border-gray-container" *ngFor="let todo of todos | orderBy" >
     <todo-item [todo]="todo" (deleteTodo)="handleDeleteTodo($event)"></todo-item>
   </li>
-  <div *ngIf="!isCoursesShown()">No data. Feel free to add new course.</div>
+  <div *ngIf="!isCoursesShown()">No data. Feel free to add new todo.</div>
+  <div class="border-gray-container main-button" *ngIf="showAll" (click)="getMoreTodos()">SHOW ALL TODOS.</div>
 </ul>

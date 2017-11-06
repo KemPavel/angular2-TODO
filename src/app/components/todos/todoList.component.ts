@@ -21,14 +21,15 @@ export class TodoListComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private spinnerService: SpinnerService
   ) {}
+
   @Input() searchQuery: string;
-  observTodos: Observable<ITodoItem[]>;
   allTodos: ITodoItem[];
   todos: ITodoItem[];
+  showAll: boolean = true;
 
   ngOnInit(): void {
-    this.observTodos = this.todoListService.getTodos();
-    this.observTodos.subscribe((data) => {
+    this.todoListService.getTodos();
+    this.todoListService.todosSubject.subscribe((data) => {
       this.todos = data;
       this.allTodos = this.todos;
       this.changeDetectorRef.markForCheck();
@@ -36,18 +37,27 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnChanges(): void {
-    this.todos = this.searchPipe.transform(this.allTodos, this.searchQuery);
+    this.todos = this.searchPipe.transform(this.searchForTodos(), this.searchQuery);
+  }
+
+  searchForTodos(): any {
+    this.todoListService.searchForTodos(this.searchQuery)
   }
 
   getTodoById(id: number): void {
     this.todoListService.getTodoById(id);
   }
 
+  getMoreTodos(): void {
+    this.showAll = false;
+    this.todoListService.searchForTodos('', 'showAll');
+  }
+
   handleDeleteTodo(id: number): void {
     console.log(this.todos);
     const isDeleteConfirmed: boolean = confirm('Do you really want to delete this course?');
     isDeleteConfirmed && this.todoListService.deleteTodo(id);
-    this.todoListService.getTodos().subscribe( data => this.todos = data);
+    this.todoListService.deleteTodo(id);
     this.spinnerService.show();
     this.test();
   }

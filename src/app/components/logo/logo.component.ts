@@ -20,14 +20,13 @@ export class LogoComponent {
   title: string = 'Logo';
 
   ngOnInit() {
-    this.authorizationService.authSubject.subscribe(
-      (name: string) => {
-        console.log(name);
-        this.isAuth = !!name;
-        this.userName = name;
-        this.changeDetectorRef.markForCheck();
-      }
-    );
+    this.authorizationService.authSubject
+    .subscribe((name) => {
+      console.log(name);
+      this.isAuth = !!name.userName;
+      this.userName = name.userName;
+      this.changeDetectorRef.markForCheck();
+    });
   }
 
   onLoginButtonClick(): void {
@@ -35,7 +34,13 @@ export class LogoComponent {
   };
 
   onLogoutButtonClick(): void {
-    this.authorizationService.logout();
+    this.authorizationService.logout()
+    .subscribe((data: any) => {
+      this.isAuth = false;
+      this.userName = '';
+      this.changeDetectorRef.markForCheck();
+      console.log(data);
+    });
   };
 
   isAuthenticated(): boolean {
