@@ -17,6 +17,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ToolboxComponent } from './components/toolbox/toolbox.component';
 import { TodoListComponent } from './components/todos/todoList.component';
 import { TodoItemComponent } from './components/todos/todo/todoItem.component';
+import { AddFormComponent } from './components/form/addForm.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { AuthorizationService } from './services/authorization.service';
@@ -46,6 +47,7 @@ import { AuthorizedHttp } from './services/http.service';
     HeaderComponent,
     LogoComponent,
     LoginComponent,
+    AddFormComponent,
     ToolboxComponent,
     TodoListComponent,
     TodoItemComponent,

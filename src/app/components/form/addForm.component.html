@@ -1,29 +1,29 @@
-<p>
-  <span>Title</span>
-  <input type="text">
-</p>
-<p>
-  <span>Description</span>
-  <input type="text">
-</p>
-<p>
-  <span>Date</span>
-  <input type="text">
-</p>
-<p>
-  <span>Duration</span>
-  <input type="text">
-</p>
-<p>
-  <span>Authors</span>
-  <input type="text">
-</p>
+<form #form="ngForm" (submit)="submit(form)">
+  <fieldset ngModelGroup="todo">
+    <div>
+      <label for="title">Title</label>
+      <input name="title" type="text" id="title" [ngModel]="todo.title">
+    </div>
+    <div>
+      <label for="description">Description</label>
+      <input name="description" type="text" id="description" [ngModel]="todo.description">
+    </div>
+    <div>
+      <label for="date">Date</label>
+      <input name="date" type="text" id="date" [ngModel]="todo.date">
+    </div>
+    <div>
+      <label for="duration">Duration</label>
+      <input name="duration" type="text" id="duration" [ngModel]="todo.duration">
+    </div>
+    <div>
+      <label>Authors</label>
+      <input name="authors" type="text" [ngModel]="todo.authors">
+    </div>
+  </fieldset>
 
-<div>
-  <div class="main-button border-gray-container">
-    <span>Save</span>
+  <div>
+    <input class="main-button border-gray-container" type="submit" value="Save">
+    <span class="main-button border-gray-container">Cancel</span>
   </div>
-  <div class="main-button border-gray-container">
-    <span>Cancel</span>
-  </div>
-</div>
+</form>
