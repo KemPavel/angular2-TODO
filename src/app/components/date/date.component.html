@@ -1,0 +1,8 @@
+<label for="date">Date</label>
+<input
+  id="date"
+  type="text"
+  (change)="setValue($event)"
+  (keyup)="setValue($event)"
+  [value]="currentValue"
+>

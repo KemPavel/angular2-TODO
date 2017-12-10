@@ -1,24 +1,38 @@
-<form #form="ngForm" (submit)="submit(form)">
-  <fieldset ngModelGroup="todo">
+<form [formGroup]="formGroup" (submit)="submit(formGroup)">
+  <fieldset formGroupName="todo">
     <div>
       <label for="title">Title</label>
-      <input name="title" type="text" id="title" [ngModel]="todo.title">
+      <input formControlName="title" type="text" id="title">
+      <span *ngIf="formGroup.controls.todo.controls.title?.invalid && formGroup.controls.todo.controls.title?.dirty">
+        {{formGroup.controls.todo.controls.title?.errors | json}}
+      </span>
     </div>
     <div>
       <label for="description">Description</label>
-      <input name="description" type="text" id="description" [ngModel]="todo.description">
+      <input formControlName="description" type="text" id="description">
+      <span *ngIf="formGroup.controls.todo.controls.description?.invalid && formGroup.controls.todo.controls.description?.dirty">
+        {{formGroup.controls.todo.controls.description?.errors | json}}
+      </span>
     </div>
     <div>
-      <label for="date">Date</label>
-      <input name="date" type="text" id="date" [ngModel]="todo.date">
+      <todo-date formControlName="date"></todo-date>
+      <span *ngIf="formGroup.controls.todo.controls.date?.invalid && formGroup.controls.todo.controls.date?.dirty">
+        {{formGroup.controls.todo.controls.date?.errors | json}}
+      </span>
     </div>
     <div>
       <label for="duration">Duration</label>
-      <input name="duration" type="text" id="duration" [ngModel]="todo.duration">
+      <input formControlName="duration" type="text" id="duration">
+      <span *ngIf="formGroup.controls.todo.controls.duration?.invalid && formGroup.controls.todo.controls.duration?.dirty">
+        {{formGroup.controls.todo.controls.duration?.errors | json}}
+      </span>
     </div>
     <div>
       <label>Authors</label>
-      <input name="authors" type="text" [ngModel]="todo.authors">
+      <input formControlName="authors" type="text">
+      <span *ngIf="formGroup.controls.todo.controls.authors?.invalid && formGroup.controls.todo.controls.authors?.dirty">
+        {{formGroup.controls.todo.controls.authors?.errors | json}}
+      </span>
     </div>
   </fieldset>
 

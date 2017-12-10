@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { HighlightBorder } from './directives/highlightBorder.directive';
@@ -19,6 +20,7 @@ import { TodoListComponent } from './components/todos/todoList.component';
 import { TodoItemComponent } from './components/todos/todo/todoItem.component';
 import { AddFormComponent } from './components/form/addForm.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { DateComponent } from './components/date/date.component';
 
 import { AuthorizationService } from './services/authorization.service';
 import { TodoListService } from './services/todoList.service';
@@ -29,7 +31,8 @@ import { AuthorizedHttp } from './services/http.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthorizationService,
@@ -51,7 +54,8 @@ import { AuthorizedHttp } from './services/http.service';
     ToolboxComponent,
     TodoListComponent,
     TodoItemComponent,
-    FooterComponent
+    FooterComponent,
+    DateComponent
   ],
   bootstrap: [ TodoAppComponent ]
 })
