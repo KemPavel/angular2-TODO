@@ -16,18 +16,29 @@ export class AddFormComponent implements OnInit {
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
-      todo: this.formBuilder.group({
-        title: ['', [Validators.required, Validators.maxLength(50)]], 
+        title: ['', [Validators.required, Validators.maxLength(50)]],
         description: ['', Validators.maxLength(500)],
         date: ['', CustomValidators.date],
         duration: '',
         authors: ''
       })
-    })
+
 
     //subscribing to changes in form
     this.formGroup.valueChanges.subscribe((value: any) => console.log('###valueChanges###', value));
   }
+
+  // ngOnChange() {
+  //   this.formGroup.reset({
+  //     todo: this.formBuilder.group({
+  //       title: ['', [Validators.required, Validators.maxLength(50)]],
+  //       description: ['', Validators.maxLength(500)],
+  //       date: ['', CustomValidators.date],
+  //       duration: '',
+  //       authors: ''
+  //     })
+  //   })
+  // }
 
   // submit(form: any): void {
   //   console.log(form.value.todo);
