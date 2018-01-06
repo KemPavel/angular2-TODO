@@ -21,11 +21,14 @@ import { TodoItemComponent } from './components/todos/todo/todoItem.component';
 import { AddFormComponent } from './components/form/addForm.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DateComponent } from './components/date/date.component';
+import { DurationComponent } from './components/duration/duration.component';
+import { AuthorsComponent } from './components/authors/authors.component';
 
 import { AuthorizationService } from './services/authorization.service';
 import { TodoListService } from './services/todoList.service';
 import { SpinnerService } from './services/spinner.service';
 import { AuthorizedHttp } from './services/http.service';
+import { FormService } from './services/form.service';
 
 @NgModule({
   imports: [
@@ -38,7 +41,8 @@ import { AuthorizedHttp } from './services/http.service';
     AuthorizationService,
     TodoListService,
     SpinnerService,
-    AuthorizedHttp
+    AuthorizedHttp,
+    FormService
   ],
   declarations: [
     HighlightBorder,
@@ -55,7 +59,9 @@ import { AuthorizedHttp } from './services/http.service';
     TodoListComponent,
     TodoItemComponent,
     FooterComponent,
-    DateComponent
+    DateComponent,
+    DurationComponent,
+    AuthorsComponent
   ],
   bootstrap: [ TodoAppComponent ]
 })

@@ -2,22 +2,22 @@ import { Component, Input, forwardRef } from '@angular/core';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR, ControlValueAccessor, Validator, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'todo-date',
-  templateUrl: './date.component.html',
-  styleUrls: ['./date.component.css'],
+  selector: 'todo-duration',
+  templateUrl: './duration.component.html',
+  styleUrls: ['./duration.component.css'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => DateComponent),
+    useExisting: forwardRef(() => DurationComponent),
     multi: true
   },
   {
     provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => DateComponent),
+    useExisting: forwardRef(() => DurationComponent),
     multi: true
   }]
 })
 
-export class DateComponent implements ControlValueAccessor, Validator {
+export class DurationComponent implements ControlValueAccessor, Validator {
 
   private currentValue: string;
 
@@ -27,14 +27,17 @@ export class DateComponent implements ControlValueAccessor, Validator {
   }
 
   validate(control: FormControl) {
-    const DATE_REGEXP = /\d{2}\/\d{2}\/\d{4}$/;
-    return DATE_REGEXP.test(control.value) ? null : {'invalidDate': true};
+    const DURATION_REGEXP = /^\d+$/;
+    return DURATION_REGEXP.test(control.value) ? null : {'invalidDuration': true};
   }
 
   private onChange = (_: any) => {};
   private onTouched = () => {};
 
   public writeValue(value: any) {
+    if (this.currentValue === undefined) {
+        this.currentValue = '';
+    }
     if (value) {
       this.currentValue = value;
     }

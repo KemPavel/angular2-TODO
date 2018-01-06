@@ -1,0 +1,8 @@
+<label for="duration">Duration</label>
+<input 
+    id="duration"
+    type="text"
+    (change)="setValue($event)"
+    (keyup)="setValue($event)"
+    [value]="currentValue"
+>

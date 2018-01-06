@@ -2,14 +2,14 @@
   <fieldset>
     <div>
       <label for="title">Title</label>
-      <input formControlName="title" type="text" id="title">
+      <input formControlName="title" [ngClass]="{'error-field': formGroup.controls.title?.errors && formGroup.controls.title?.touched}" type="text" id="title">
       <span *ngIf="formGroup.controls.title?.invalid && formGroup.controls.title?.dirty">
         {{formGroup.controls.title?.errors | json}}
       </span>
     </div>
     <div>
       <label for="description">Description</label>
-      <input formControlName="description" type="text" id="description">
+      <input formControlName="description" [ngClass]="{'error-field': formGroup.controls.description?.errors && formGroup.controls.description?.touched}" type="text" id="description">
       <span *ngIf="formGroup.controls.description?.invalid && formGroup.controls.description?.dirty">
         {{formGroup.controls.description?.errors | json}}
       </span>
@@ -21,15 +21,13 @@
       </span>
     </div>
     <div>
-      <label for="duration">Duration</label>
-      <input formControlName="duration" type="text" id="duration">
+      <todo-duration formControlName="duration"></todo-duration>
       <span *ngIf="formGroup.controls.duration?.invalid && formGroup.controls.duration?.dirty">
         {{formGroup.controls.duration?.errors | json}}
       </span>
     </div>
     <div>
-      <label>Authors</label>
-      <input formControlName="authors" type="text">
+      <todo-authors formControlName="authors" [authors]="authors"></todo-authors>
       <span *ngIf="formGroup.controls.authors?.invalid && formGroup.controls.authors?.dirty">
         {{formGroup.controls.authors?.errors | json}}
       </span>
@@ -37,7 +35,7 @@
   </fieldset>
 
   <div>
-    <input class="main-button border-gray-container" type="submit" value="Save">
+    <input class="main-button border-gray-container" type="submit" value="Save" [disabled]="!isFormValid()">
     <span class="main-button border-gray-container">Cancel</span>
   </div>
   <p>{{formGroup.value | json}}</p>

@@ -8,6 +8,8 @@ let user = {
   password: null
 };
 
+const authors = ['author1','author2','author3','author4','author5','author6'];
+
 let todos = [
   {
     id: 0,
@@ -109,6 +111,10 @@ app.post('/logout', function(req, res) {
 
 app.get('/userinfo', function(req, res) {
   res.send(user);
+})
+
+app.get('/authors', function(req, res) {
+  res.send(authors);
 })
 
 app.listen(3004, function () {
