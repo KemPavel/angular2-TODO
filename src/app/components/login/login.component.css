@@ -12,3 +12,8 @@
   line-height: 40px;
   padding-left: 15px;
 }
+
+.login-form__submit-button {
+  display: block;
+  width: 100%;
+}

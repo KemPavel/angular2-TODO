@@ -1,12 +1,26 @@
-<main>
+<form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit(loginFormGroup)">
   <div class="login-form">
-    <input class="login-form__input" type="text" required placeholder="login" [(ngModel)]="userName">
-    <input class="login-form__input" type="password" required placeholder="password" [(ngModel)]="password">
+    <input 
+      formControlName="login" 
+      class="login-form__input" 
+      type="text" 
+      placeholder="login" 
+    >
+    <span *ngIf="loginFormGroup.controls.login?.invalid && loginFormGroup.controls.login?.dirty">
+      {{loginFormGroup.controls.login?.errors | json}}
+    </span>
+    <input 
+      formControlName="password"
+      class="login-form__input" 
+      type="password"
+      placeholder="password" 
+    >
+    <span *ngIf="loginFormGroup.controls.password?.invalid && loginFormGroup.controls.password?.dirty">
+      {{loginFormGroup.controls.password?.errors | json}}
+    </span>
   </div>
-  <div class="main-button border-gray-container" (click)="onLogin()">
-    <p>Login</p>
-  </div>
+  <input type="submit" class="login-form__submit-button main-button border-gray-container" value="Login" [disabled]="!isFormValid()">
   <div class="main-button border-gray-container" (click)="closeLoginForm()">
     <p>Back</p>
   </div>
-</main>
+</form>

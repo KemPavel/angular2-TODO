@@ -14,7 +14,11 @@ export class AddFormComponent implements OnInit {
   formGroup: FormGroup;
   authors: Array<string>;
 
-  constructor(private formBuilder: FormBuilder, private changeDetectorRef: ChangeDetectorRef, private formService: FormService) {}
+  constructor(
+    private formBuilder: FormBuilder, 
+    private changeDetectorRef: ChangeDetectorRef, 
+    private formService: FormService
+  ) {}
 
   ngOnInit() {
     this.formService.getAuthors();
