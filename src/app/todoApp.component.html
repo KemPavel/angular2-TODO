@@ -1,12 +1,16 @@
 <main class="container border-gray-container">
   <todo-header></todo-header>
   <todo-logo></todo-logo>
-  <todo-login *ngIf="isLoginFormVisible()" (login)="handleAuth()"></todo-login>
-  <div *ngIf="!isLoginFormVisible()">
-    <todo-toolbox (searchForTodos)="onSearchForTodos($event)"></todo-toolbox>
-    <todo-list [searchQuery]="searchQuery"></todo-list>
+  <div>
+    <router-outlet></router-outlet>
   </div>
   <todo-footer></todo-footer>
-  <todo-add-form></todo-add-form>
 </main>
 <todo-spinner></todo-spinner>
+
+<!-- <todo-login *ngIf="isLoginFormVisible()" (login)="handleAuth()"></todo-login>
+<div *ngIf="!isLoginFormVisible()">
+  <todo-toolbox (searchForTodos)="onSearchForTodos($event)"></todo-toolbox>
+  <todo-list [searchQuery]="searchQuery"></todo-list>
+</div>
+<todo-add-form></todo-add-form> -->

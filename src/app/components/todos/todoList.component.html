@@ -1,3 +1,4 @@
+<todo-toolbox (searchForTodos)="onSearchForTodos($event)"></todo-toolbox>
 <ul>
   <li [highlight]="todo.date" class="border-gray-container" *ngFor="let todo of todos | orderBy" >
     <todo-item [todo]="todo" (deleteTodo)="handleDeleteTodo($event)"></todo-item>

@@ -4,12 +4,12 @@
       <span>{{todo.title | uppercase}}</span>
       <span>{{todo.duration | convertDuration}}</span>
       <img *ngIf="todo.topRated" class="item__star-icon" src="../../../../assets/images/star.png" alt="">
-      <span>{{todo.date | date:'dd-MMM-yyyy'}}</span>
+      <span>{{convertDate(todo.date)}}</span>
     </p>
     <p class="item__description">{{todo.description}}</p>
   </div>
   <div class="item__buttons">
-    <div class="main-button border-gray-container">
+    <div class="main-button border-gray-container" routerLink="{{ todo.id }}">
       <span>Edit todo</span>
     </div>
     <div class="main-button border-gray-container" (click)="onDeleteTodo()">

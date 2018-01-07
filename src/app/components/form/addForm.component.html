@@ -1,15 +1,15 @@
-<form [formGroup]="formGroup">
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup)">
   <fieldset>
     <div>
-      <label for="title">Title</label>
+      <label class="form-label" for="title">Title</label>
       <input formControlName="title" [ngClass]="{'error-field': formGroup.controls.title?.errors && formGroup.controls.title?.touched}" type="text" id="title">
       <span *ngIf="formGroup.controls.title?.invalid && formGroup.controls.title?.dirty">
         {{formGroup.controls.title?.errors | json}}
       </span>
     </div>
     <div>
-      <label for="description">Description</label>
-      <input formControlName="description" [ngClass]="{'error-field': formGroup.controls.description?.errors && formGroup.controls.description?.touched}" type="text" id="description">
+      <label class="form-label" for="description">Description</label>
+      <textarea formControlName="description" [ngClass]="{'error-field': formGroup.controls.description?.errors && formGroup.controls.description?.touched}" rows="10" cols="40" type="text" id="description"></textarea>
       <span *ngIf="formGroup.controls.description?.invalid && formGroup.controls.description?.dirty">
         {{formGroup.controls.description?.errors | json}}
       </span>
@@ -34,9 +34,9 @@
     </div>
   </fieldset>
 
-  <div>
+  <div class="form-buttons">
     <input class="main-button border-gray-container" type="submit" value="Save" [disabled]="!isFormValid()">
-    <span class="main-button border-gray-container">Cancel</span>
+    <span class="main-button border-gray-container" routerLink="/">Cancel</span>
   </div>
   <p>{{formGroup.value | json}}</p>
   <p>{{formGroup.status | json}}</p>

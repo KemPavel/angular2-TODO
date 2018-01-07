@@ -22,7 +22,6 @@ export class LogoComponent {
   ngOnInit() {
     this.authorizationService.authSubject
     .subscribe((name) => {
-      console.log(name);
       this.isAuth = !!name.userName;
       this.userName = name.userName;
       this.changeDetectorRef.markForCheck();
@@ -36,10 +35,10 @@ export class LogoComponent {
   onLogoutButtonClick(): void {
     this.authorizationService.logout()
     .subscribe((data: any) => {
+      localStorage.clear();
       this.isAuth = false;
       this.userName = '';
       this.changeDetectorRef.markForCheck();
-      console.log(data);
     });
   };
 

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { routes } from './todoApp.router';
+
 import { HighlightBorder } from './directives/highlightBorder.directive';
 
 import { ConvertDurationPipe } from './pipes/duration.pipe';
@@ -23,6 +25,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DateComponent } from './components/date/date.component';
 import { DurationComponent } from './components/duration/duration.component';
 import { AuthorsComponent } from './components/authors/authors.component';
+import { ErrorPageComponent } from './components/errorPage/errorPage.component';
 
 import { AuthorizationService } from './services/authorization.service';
 import { TodoListService } from './services/todoList.service';
@@ -35,7 +38,8 @@ import { FormService } from './services/form.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    routes
   ],
   providers: [
     AuthorizationService,
@@ -61,7 +65,8 @@ import { FormService } from './services/form.service';
     FooterComponent,
     DateComponent,
     DurationComponent,
-    AuthorsComponent
+    AuthorsComponent,
+    ErrorPageComponent
   ],
   bootstrap: [ TodoAppComponent ]
 })

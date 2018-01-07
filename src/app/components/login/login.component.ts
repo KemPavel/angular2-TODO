@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthorizationService } from '../../services/authorization.service';
 import { SpinnerService } from '../../services/spinner.service';
@@ -18,7 +19,8 @@ export class LoginComponent {
   constructor(
     private authorizationService: AuthorizationService,
     private spinnerService: SpinnerService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -29,25 +31,21 @@ export class LoginComponent {
   }
 
   onSubmit(formData: any): void {
+    this.spinnerService.show();
     const { login, password } = formData.value;
     this.authorizationService.login(login, password)
       .subscribe((data: any) => {
         console.log(data);
+        localStorage.setItem('token', data.token);
+        this.router.navigateByUrl('courses');
+        this.spinnerService.hide();
       });
     this.login.emit();
-    this.spinnerService.show();
-    this.test();
     console.log(`YOU HAVE SUCESSFULLY LOGGED IN WITH NAME: ${login} AND PASSWORD: ${password}`);
   }
 
   isFormValid() {
     return this.loginFormGroup.status === 'VALID';
-  }
-
-  test(): void {
-    setTimeout(() => {
-      this.spinnerService.hide();
-    }, 1000);
   }
 
   closeLoginForm(): void {

@@ -19,4 +19,8 @@ export class TodoItemComponent {
     onDeleteTodo(todo: ITodoItem): void {
       this.deleteTodo.emit(this.todo.id);
     }
+
+    convertDate(date: string): string {
+      return date.replace(/\//g, "-");
+    }
 }

@@ -15,7 +15,6 @@ export class SpinnerComponent {
   ngOnInit() {
     this.spinnerService.spinnerSubject.subscribe(
       (value: boolean) => {
-        console.log(value)
         this.isSpinnerShown = value;
         this.changeDetectorRef.markForCheck();
       }

@@ -2,6 +2,10 @@ import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CustomValidators } from '../../validators/customValidators';
 import { FormService } from '../../services/form.service';
+import { TodoListService } from '../../services/todoList.service';
+import { ActivatedRoute } from '@angular/router';
+import { SpinnerService } from '../../services/spinner.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'todo-add-form',
@@ -13,20 +17,51 @@ import { FormService } from '../../services/form.service';
 export class AddFormComponent implements OnInit {
   formGroup: FormGroup;
   authors: Array<string>;
+  sub: any;
+  todoSub: any;
+  id: number;
 
   constructor(
     private formBuilder: FormBuilder, 
     private changeDetectorRef: ChangeDetectorRef, 
-    private formService: FormService
+    private formService: FormService,
+    private activatedRoute: ActivatedRoute,
+    private todoListService: TodoListService,
+    private spinnerService: SpinnerService,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.spinnerService.show();
     this.formService.getAuthors();
+
+    this.sub = this.activatedRoute.params.subscribe(params => {
+
+      if (params.id) {
+        this.id = params.id;
+        this.todoListService.getTodoById(params.id);
+      }
+    });
+
+    this.todoSub = this.todoListService.todosSubject.subscribe( data => {
+      if(this.formGroup) {
+        this.formGroup.setValue({
+          title: data.title,
+          description: data.description,
+          date: data.date,
+          duration: data.duration,
+          authors: this.checkSelectedAuthors(data.authors)
+        });
+      }
+      this.spinnerService.hide();
+      this.changeDetectorRef.markForCheck();
+    });
 
     this.formService.formSubject.subscribe((authors) => {
       this.authors = authors;
+      this.spinnerService.hide();
       this.changeDetectorRef.markForCheck();
-    })
+    });
 
     this.formGroup = this.formBuilder.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
@@ -35,10 +70,29 @@ export class AddFormComponent implements OnInit {
       duration: ['', Validators.required],
       authors: [[], Validators.required]
     });
+  }
 
+  onSubmit(formData: any): any {
+    console.log(formData.value);
+    const updatedTodo = formData.value;
+    updatedTodo.id = this.id;
+    this.todoListService.updateTodo(updatedTodo);
+    this.todoSub.unsubscribe();
+    this.router.navigateByUrl('courses');
+  }
 
-    //subscribing to changes in form
-    // this.formGroup.valueChanges.subscribe((value: any) => console.log('###valueChanges###', value));
+  checkSelectedAuthors(authors: Array<string>) {
+    if (authors && authors.length) {
+      var selectedAuthors: any = [];
+      this.authors.map( (formAuthor: string) => {
+        authors.map( (resAuthor: string) => {
+          if(formAuthor === resAuthor) {
+            selectedAuthors.push(formAuthor);
+          }
+        });
+      });
+      return selectedAuthors;
+    }
   }
 
   isFormValid(): boolean {
@@ -56,5 +110,10 @@ export class AddFormComponent implements OnInit {
     if(mm < 10) mm = '0' + mm;
 
     return dd + '/' + mm + '/' + yyyy;
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+    this.todoSub.unsubscribe();
   }
 }

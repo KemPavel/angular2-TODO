@@ -19,8 +19,13 @@
       {{loginFormGroup.controls.password?.errors | json}}
     </span>
   </div>
-  <input type="submit" class="login-form__submit-button main-button border-gray-container" value="Login" [disabled]="!isFormValid()">
-  <div class="main-button border-gray-container" (click)="closeLoginForm()">
+  <input 
+    type="submit"
+    class="login-form__submit-button main-button border-gray-container" 
+    value="Login" 
+    [disabled]="!isFormValid()"
+  >
+  <div class="main-button border-gray-container" (click)="closeLoginForm()" routerLink="/">
     <p>Back</p>
   </div>
 </form>

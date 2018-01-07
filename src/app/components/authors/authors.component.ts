@@ -15,29 +15,29 @@ import { Event } from '@angular/router/src/events';
 
 export class AuthorsComponent implements ControlValueAccessor {
   @Input() authors: Array<string>;
-  private checkedAuthors: any = [];
+  private currentValue: any = [];
 
-  setValue(event: any) {
-      const index = this.checkedAuthors.findIndex( (id: number) => id === event.target.id );
+  setValue(author: string) {
+      const index = this.currentValue.findIndex( (elem: string) => elem === author );
       if(index < 0) {
-        this.checkedAuthors.push(event.target.id);
+        this.currentValue.push(author);
       } else {
-        this.checkedAuthors.splice(index, 1);
+        this.currentValue.splice(index, 1);
       }
-    this.onChange(this.checkedAuthors); //have to call onChange() to update form view
-  }
-  
-  isChecked(): boolean {
-      return false;
+    this.onChange(this.currentValue); //have to call onChange() to update form view
   }
 
   private onChange = (_: any) => {};
   private onTouched = () => {};
 
-  public writeValue(value: any) {
-    // if (value.length) {
-    //   this.currentValue = value;
-    // }
+  public writeValue(value: any): void {
+    if (value.length) {
+      this.currentValue = value;
+    }
+  }
+
+  isChecked(author: string): boolean {
+    return this.currentValue.includes(author);
   }
 
   public registerOnChange(fn: any) {

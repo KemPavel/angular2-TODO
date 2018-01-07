@@ -11,7 +11,9 @@ export class SpinnerService {
   }
 
   hide(): void {
-    this.spinnerSubject.next(false);
+    setTimeout(() => {
+      this.spinnerSubject.next(false);
+    }, 1000);
   }
 
 }

@@ -73,8 +73,12 @@ export class TodoListService {
     return todos.length;
   }
 
-  getTodoById(id: number): ITodoItem {
-    return todos.find(todo => todo.id === id);
+  getTodoById(id: number): void {
+    this.http.get(`http://localhost:3004/todos/${id}`)
+      .map( (res: any) => res.json())
+      .subscribe( todo => {
+        this.todosSubject.next(todo);
+      })
   };
 
   searchForTodos(search: string = '', showAll?: string): void {
@@ -88,8 +92,12 @@ export class TodoListService {
   createTodo(): void {
   };
 
-  updateTodo(): void {
-
+  updateTodo(todo: ITodoItem): void {
+    this.http.post(`http://localhost:3004/todos/${todo.id}`, todo)
+      .map( (res: Response) => res.json())
+      .subscribe( todo => {
+        this.updateTodos(todos);
+      });
   };
 
   updateTodos(todos: ITodoItem[]): void {
