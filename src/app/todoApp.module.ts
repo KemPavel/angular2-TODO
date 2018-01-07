@@ -32,6 +32,7 @@ import { TodoListService } from './services/todoList.service';
 import { SpinnerService } from './services/spinner.service';
 import { AuthorizedHttp } from './services/http.service';
 import { FormService } from './services/form.service';
+import { AuthGuardService } from './services/authGuard.service';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { FormService } from './services/form.service';
     TodoListService,
     SpinnerService,
     AuthorizedHttp,
-    FormService
+    FormService,
+    AuthGuardService
   ],
   declarations: [
     HighlightBorder,

@@ -95,7 +95,9 @@ app.post('/todos/:id', function(req, res) {
   });
   if(index > -1) {
     todos[index] = req.body;
-  } 
+  } else {
+    todos.push(req.body);
+  }
   res.status(200);
   res.send(todos.slice(0, 3));
 })

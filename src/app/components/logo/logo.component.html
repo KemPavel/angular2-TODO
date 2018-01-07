@@ -2,7 +2,8 @@
   <img class="logo__image" src="../../../assets/images/angular.png" alt="logo">
   <h1 class="logo__title">{{title}}</h1>
   <div class="logo__button border-gray-container">
-    <span>Todos</span>
+    <span routerLink="/">{{homeUrl}} </span>
+    <span>{{breadcrumb}}</span>
   </div>
   <div>
     <p class="main-button border-gray-container" (click)="onLoginButtonClick()" *ngIf="!isAuth" routerLink="login">login</p>

@@ -37,6 +37,7 @@ export class LoginComponent {
       .subscribe((data: any) => {
         console.log(data);
         localStorage.setItem('token', data.token);
+        localStorage.setItem('userName', login);
         this.router.navigateByUrl('courses');
         this.spinnerService.hide();
       });

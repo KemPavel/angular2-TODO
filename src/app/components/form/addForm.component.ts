@@ -75,7 +75,7 @@ export class AddFormComponent implements OnInit {
   onSubmit(formData: any): any {
     console.log(formData.value);
     const updatedTodo = formData.value;
-    updatedTodo.id = this.id;
+    updatedTodo.id = this.id || Math.round(Math.random() * 10) + 100;
     this.todoListService.updateTodo(updatedTodo);
     this.todoSub.unsubscribe();
     this.router.navigateByUrl('courses');
