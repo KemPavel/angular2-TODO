@@ -60,4 +60,35 @@ describe('AddFormComponent', () => {
     it ('should work', () => {
       expect(fixture.componentInstance instanceof AddFormComponent).toBe(true, 'should create AddFormComponent');
     });
+
+    it ('form group is valid if controls filled correctly', () => {
+      comp.ngOnInit();
+      fixture.detectChanges();
+      comp.formGroup.setValue({
+        title: 'title',
+        description: 'description',
+        date: comp.getCurrentDate(),
+        duration: 123,
+        authors: ['author1', 'author2']
+      });
+      const result = comp.isFormValid();
+  
+      expect(result).toBeTruthy();
+    });
+
+    it ('form group is invalid if controls are not filled', () => {
+      comp.ngOnInit();
+      fixture.detectChanges();
+      comp.formGroup.setValue({
+        title: '',
+        description: '',
+        date: '',
+        duration: '',
+        authors: []
+      });
+
+      const result = comp.isFormValid();
+  
+      expect(result).toBeFalsy();
+    });
   });
