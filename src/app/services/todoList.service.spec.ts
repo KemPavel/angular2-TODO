@@ -1,43 +1,59 @@
-beforeEach(() => {
-  // stub UserService for test purposes
-  userServiceStub = {
-    isLoggedIn: true,
-    user: { name: 'Test User'}
-  };
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { MockBackend, MockConnection  } from '@angular/http/testing';
+import { TestBed, async, inject } from '@angular/core/testing';
+import { HttpModule } from '@angular/http';
 
-  TestBed.configureTestingModule({
-     declarations: [ WelcomeComponent ],
-     providers:    [ {provide: UserService, useValue: userServiceStub } ]
+import { TodoListService } from './todoList.service';
+import { SpinnerService } from './spinner.service';
+import { AuthorizedHttp } from './http.service';
+
+
+
+describe('todoListService', () => {
+  let testingService: TodoListService = null;
+  let spinnerService: SpinnerService = null;
+  let backend: MockBackend = null;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule(
+      { 
+        imports: [ HttpModule ],
+        declarations: [ ],
+        providers: [ SpinnerService, {provide: AuthorizedHttp, useClass: MockBackend}, TodoListService ]
+      }
+    );
+  });
+  beforeEach(inject([SpinnerService, AuthorizedHttp, TodoListService], (spinnerService: SpinnerService, http: MockBackend, todoListService: TodoListService) => {
+    testingService = todoListService;
+    backend = http;
+  }));
+
+  it('should return length of todos', () => {
+    const result = testingService.getNumberOfTodos();
+
+    expect(result).toEqual(6);
   });
 
-  fixture = TestBed.createComponent(WelcomeComponent);
-  comp    = fixture.componentInstance;
+  it('should update list of todos', () => {
+    const newTodo = [{
+        id: 0,
+        title: 'Todo_1',
+        date: '2017-10-27',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, vitae id nam sit fuga magni. Deserunt sint aspernatur, adipisci totam in quisquam laborum accusantium assumenda repellendus optio! Qui, vitae, nostrum.',
+        duration: 90,
+        topRated: true
+    }];
 
-  // UserService from the root injector
-  userService = TestBed.get(UserService);
 
-  //  get the "welcome" element by CSS selector (e.g., by class name)
-  de = fixture.debugElement.query(By.css('.welcome'));
-  el = de.nativeElement;
-});
+    spyOn(testingService.todosSubject, 'next');
 
-it('should welcome the user', () => {
-  fixture.detectChanges();
-  const content = el.textContent;
-  expect(content).toContain('Welcome', '"Welcome ..."');
-  expect(content).toContain('Test User', 'expected name');
-});
+    testingService.updateTodos(newTodo);
 
-it('should welcome "Bubba"', () => {
-  userService.user.name = 'Bubba'; // welcome message hasn't been shown yet
-  fixture.detectChanges();
-  expect(el.textContent).toContain('Bubba');
-});
+    expect(testingService.todosSubject.next).toHaveBeenCalledWith(newTodo);
+  });
 
-it('should request login if not logged in', () => {
-  userService.isLoggedIn = false; // welcome message hasn't been shown yet
-  fixture.detectChanges();
-  const content = el.textContent;
-  expect(content).not.toContain('Welcome', 'not welcomed');
-  expect(content).toMatch(/log in/i, '"log in"');
 });
