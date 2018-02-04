@@ -4,6 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { todoListReducer } from './reducers/todoList.reducer';
+import { authReducer } from './reducers/authorization.reducer';
+import { formReducer } from './reducers/form.reducer';
+
 import { routes } from './todoApp.router';
 
 import { HighlightBorder } from './directives/highlightBorder.directive';
@@ -40,7 +46,13 @@ import { AuthGuardService } from './services/authGuard.service';
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    routes
+    routes,
+    StoreModule.forRoot({
+      todoList: todoListReducer,
+      auth: authReducer,
+      form: formReducer
+    }),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [
     AuthorizationService,

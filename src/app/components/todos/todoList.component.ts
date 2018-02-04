@@ -2,6 +2,8 @@ import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, O
 import { SearchByNamePipe } from '../../pipes/search.pipe';
 import { Observable } from 'rxjs/Observable';
 
+import { Store } from '@ngrx/store'
+
 import { TodoListService } from '../../services/todoList.service';
 import { SpinnerService } from '../../services/spinner.service';
 import { ITodoItem } from './todo/todoItem.component.d';
@@ -19,21 +21,25 @@ export class TodoListComponent implements OnInit {
     private todoListService: TodoListService,
     private searchPipe: SearchByNamePipe,
     private changeDetectorRef: ChangeDetectorRef,
-    private spinnerService: SpinnerService
-  ) {}
+    private spinnerService: SpinnerService,
+    private store: Store<any>
+  ) {
+    this.courses$ = this.store.select('todoList');
+    this.courses$.subscribe(
+      (res) => {
+          this.todos = res;
+          this.changeDetectorRef.markForCheck();
+    });
+  }
 
   @Input() searchQuery: string;
   allTodos: ITodoItem[];
   todos: ITodoItem[];
   showAll: boolean = true;
+  courses$: any;
 
   ngOnInit(): void {
     this.todoListService.getTodos();
-    this.todoListService.todosSubject.subscribe((data) => {
-      this.todos = data;
-      this.allTodos = this.todos;
-      this.changeDetectorRef.markForCheck();
-    })
   }
 
   ngOnChanges(): void {

@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { Store } from '@ngrx/store'
 
 import 'rxjs/add/operator/map';
 
@@ -59,13 +60,13 @@ const todos: ITodoItem[] = [
 export class TodoListService {
   public todosSubject = new Subject<any>();
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private store: Store<any>) {}
 
   getTodos(): void {
     this.http.get('http://localhost:3004/todos')
       .map((res: any) => res.json())
       .subscribe((todos) => {
-        this.updateTodos(todos);
+        this.store.dispatch({type: 'UPDATE_TODOS', payload: todos})
       });
   };
 
@@ -85,18 +86,15 @@ export class TodoListService {
     this.http.get('http://localhost:3004/todos?search=' + search + '&all=' + showAll)
       .map((data: Response) => data.json())
       .subscribe((todos) => {
-        this.updateTodos(todos);
+        this.store.dispatch({type: 'UPDATE_TODOS', payload: todos})
       });
   }
-
-  createTodo(): void {
-  };
 
   updateTodo(todo: ITodoItem): void {
     this.http.post(`http://localhost:3004/todos/${todo.id}`, todo)
       .map( (res: Response) => res.json())
       .subscribe( todo => {
-        this.updateTodos(todos);
+        this.store.dispatch({type: 'UPDATE_TODOS', payload: todos})
       });
   };
 

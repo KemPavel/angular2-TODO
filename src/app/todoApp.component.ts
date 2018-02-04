@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
-
+import { Observable } from 'rxjs/Observable';
 import { ITodoItem } from './components/todos/todo/todoItem.component.d';
 
 import { AuthorizationService } from './services/authorization.service';
@@ -13,7 +13,7 @@ import { AuthorizationService } from './services/authorization.service';
 
 export class TodoAppComponent {
   public searchQuery: string;
-  public isAuth: boolean;
+  public isAuth: Observable<boolean>;
   constructor(private authorizationService: AuthorizationService) {}
 
   isLoginFormVisible(): boolean {

@@ -6,6 +6,7 @@ import { TodoListService } from '../../services/todoList.service';
 import { ActivatedRoute } from '@angular/router';
 import { SpinnerService } from '../../services/spinner.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store'
 
 @Component({
   selector: 'todo-add-form',
@@ -20,6 +21,7 @@ export class AddFormComponent implements OnInit {
   sub: any;
   todoSub: any;
   id: number;
+  authors$: any;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -28,8 +30,17 @@ export class AddFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private todoListService: TodoListService,
     private spinnerService: SpinnerService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private store: Store<any>
+  ) {
+    this.authors$ = this.store.select('form');
+    this.authors$.subscribe(
+      (res) => {
+        this.authors = res;
+        this.spinnerService.hide();
+        this.changeDetectorRef.markForCheck();
+    });
+  }
 
   ngOnInit() {
     this.spinnerService.show();
@@ -57,11 +68,11 @@ export class AddFormComponent implements OnInit {
       this.changeDetectorRef.markForCheck();
     });
 
-    this.formService.formSubject.subscribe((authors) => {
-      this.authors = authors;
-      this.spinnerService.hide();
-      this.changeDetectorRef.markForCheck();
-    });
+    // this.formService.formSubject.subscribe((authors) => {
+    //   this.authors = authors;
+    //   this.spinnerService.hide();
+    //   this.changeDetectorRef.markForCheck();
+    // });
 
     this.formGroup = this.formBuilder.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
